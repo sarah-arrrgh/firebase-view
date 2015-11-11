@@ -4,6 +4,8 @@
   <title>Ceres Product List</title>
   <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
   <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+  <script src="./bundle.js"></script>
+
   <link rel="stylesheet" href="./css/index.css">
 
 </head>
@@ -12,31 +14,6 @@
   <h1>Ceres Product List</h1>
 
   <div id="displayProductsDiv">
-
-    <script>
-      var productRef = new Firebase('https://ceres-price-list.firebaseio.com/Ceres')
-      productRef.on("value", function(snapshot){
-        var allOfTheData = snapshot.val()
-        for (var key in allOfTheData){
-          var caseQtyNumber
-          var product = allOfTheData[key]
-          var casePriceString = product.caseTradePrice
-          var casePriceNumber = Number(casePriceString.replace(/[^0-9\.]+/g,""))
-
-          if (product.quantity == "Each"){
-            var caseQtyString = product.quantity
-            caseQtyNumber = 1
-          } else {
-            var caseQtyString = product.quantity
-            caseQtyNumber = Number(caseQtyString.replace(/[^0-9\.]+/g,""))
-          }
-          var priceUnrounded = casePriceNumber / caseQtyNumber
-          var pricePerUnit = Math.round(priceUnrounded*100)/100
-          $("#displayProductsDiv").append("<p><b>" + product.brand + " " + product.description + " (" + product.unitSize + ")</b> - " + product.caseTradePrice + " for " + product.quantity + " (" + product.unitTradePrice + " each)</p>")
-        }
-      })
-
-    </script>
   </div>
 
 </body>
