@@ -17,6 +17,7 @@
         var allOfTheData = snapshot.val()
         for (var key in allOfTheData){
           $("#displayProductsDiv").append("<p>" + allOfTheData[key].description + "</p>")
+          $("#displayProductsDiv").append("<p>" + allOfTheData[key].code + "</p>")
         }
       })
     </script>
