@@ -1,0 +1,23 @@
+<html>
+
+<head>
+  <title>Ceres Product List</title>
+  <script src="https://cdn.firebase.com/js/client/2.2.1/firebase.js"></script>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+</head>
+
+<body>
+  <h1>Ceres Product List</h1>
+
+  <div id="displayProductsDiv">
+
+    <script>
+      var productRef = new Firebase('https://ceres-price-list.firebaseio.com/Ceres')
+      productRef.on("value", function(snapshot){
+        console.log(snapshot.val())
+      })
+    </script>
+  </div>
+
+</body>
+</html>
