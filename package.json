@@ -17,6 +17,8 @@
   },
   "homepage": "https://github.com/sarah-arrrgh/firebase-view#readme",
   "dependencies": {
+    "lodash": "^3.10.1",
+    "lodash.groupby": "^3.1.1",
     "react": "^0.14.2",
     "react-dom": "^0.14.2"
   },

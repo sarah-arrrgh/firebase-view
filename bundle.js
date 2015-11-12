@@ -73,12 +73,9 @@
 
 	'use strict';
 
-	var _createClass = (function () { function defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } } return function (Constructor, protoProps, staticProps) { if (protoProps) defineProperties(Constructor.prototype, protoProps); if (staticProps) defineProperties(Constructor, staticProps); return Constructor; }; })();
-
 	Object.defineProperty(exports, "__esModule", {
 	  value: true
 	});
-	exports.ProductList = undefined;
 
 	var _react = __webpack_require__(2);
 
@@ -88,81 +85,86 @@
 
 	function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-	function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+	exports.default = ProductList = _react2.default.createClass({
+	  displayName: 'ProductList',
 
-	function _possibleConstructorReturn(self, call) { if (!self) { throw new ReferenceError("this hasn't been initialised - super() hasn't been called"); } return call && (typeof call === "object" || typeof call === "function") ? call : self; }
+	  getInitialState: function getInitialState() {
+	    return { products: [] };
+	  },
 
-	function _inherits(subClass, superClass) { if (typeof superClass !== "function" && superClass !== null) { throw new TypeError("Super expression must either be null or a function, not " + typeof superClass); } subClass.prototype = Object.create(superClass && superClass.prototype, { constructor: { value: subClass, enumerable: false, writable: true, configurable: true } }); if (superClass) Object.setPrototypeOf ? Object.setPrototypeOf(subClass, superClass) : subClass.__proto__ = superClass; }
+	  componentWillMount: function componentWillMount() {
+	    this.firebaseRef = new Firebase("https://ceres-price-list.firebaseio.com/Ceres");
+	    this.firebaseRef.on("value", function (snapshot) {
+	      var products = [];
 
-	// const ProductList = React.createElement({
+	      for (var key in snapshot.val()) {
+	        var product = snapshot.val()[key];
+	        // product.key = key
+	        products.push(product);
+	      }
+	      this.setState({ products: products });
+	    });
+	  },
 
-	//   getInitialState: function () {
-	//     return { products: [] }
-	//   },
-
-	//   componentWillMount: function(){
-	//     this.firebaseRef = new Firebase("https://ceres-price-list.firebaseio.com/Ceres")
-	//     this.firebaseRef.on("value", function(snapshot){
-	//       let products = []
-
-	//     })
-	//   }
-
-	// })
-
-	var ProductList = exports.ProductList = (function (_React$Component) {
-	  _inherits(ProductList, _React$Component);
-
-	  function ProductList() {
-	    _classCallCheck(this, ProductList);
-
-	    return _possibleConstructorReturn(this, Object.getPrototypeOf(ProductList).apply(this, arguments));
-	  }
-
-	  _createClass(ProductList, [{
-	    key: 'componentWillMount',
-	    value: function componentWillMount() {
-	      this.setState({ products: [] });
-	      this.products = [];
-	      this.firebaseRef = new Firebase("https://ceres-price-list.firebaseio.com/Ceres");
-	      this.firebaseRef.on("value", (function (snapshot) {
-	        var products = [];
-	        console.log("snapshot", snapshot.val());
-	        for (var key in snapshot.val()) {
-	          var product = snapshot.val()[key];
-	          // product.key = key
-	          products.push(product);
+	  render: function render() {
+	    return _react2.default.createElement(
+	      'div',
+	      {
+	        __source: {
+	          fileName: '../../../src/productList.jsx',
+	          lineNumber: 27
 	        }
-	        this.setState({
-	          products: products
-	        });
-	      }).bind(this));
-	    }
-	  }, {
-	    key: 'render',
-	    value: function render() {
-	      return _react2.default.createElement(
-	        'div',
+	      },
+	      _react2.default.createElement(
+	        'p',
 	        {
 	          __source: {
 	            fileName: '../../../src/productList.jsx',
-	            lineNumber: 41
+	            lineNumber: 28
 	          }
 	        },
-	        ' All products',
-	        this.state.products.map(function (product) {
-	          return _react2.default.createElement(_product.Product, { data: product, __source: {
-	              fileName: '../../../src/productList.jsx',
-	              lineNumber: 43
-	            }
-	          });
-	        })
-	      );
-	    }
-	  }]);
+	        ' All products '
+	      ),
+	      this.state.products.map(function (product) {
+	        return _react2.default.createElement(_product.Product, { data: product, __source: {
+	            fileName: '../../../src/productList.jsx',
+	            lineNumber: 31
+	          }
+	        });
+	      })
+	    );
+	  }
+	});
 
-	  return ProductList;
-	})(_react2.default.Component);
+	// export class ProductList extends React.Component {
+
+	// componentWillMount() {
+	//   this.setState({products: []})
+	//   this.products = []
+	//   this.firebaseRef = new Firebase("https://ceres-price-list.firebaseio.com/Ceres")
+	//   this.firebaseRef.on("value", function(snapshot) {
+	//     const products = []
+	//       console.log("snapshot", snapshot.val())
+	//     for( var key in snapshot.val()) {
+	//       var product = snapshot.val()[key]
+	//       // product.key = key
+	//       products.push(product)
+	//     }
+	//     this.setState({
+	//       products: products
+	//     })
+	//   }.bind(this))
+	// }
+
+	// render() {
+	//   return <div> All products
+	//     {this.state.products.map((product) => {
+	//       return <Product data={product} />
+	//       })
+	//     }
+	//   </div>
+	//   }
+	// }
 
 /***/ },
 /* 2 */
